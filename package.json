@@ -5,7 +5,9 @@
   "scripts": {
     "start": "ts-node dist/server.ts",
     "build": "tsc",
-    "dev": "nodemon src/server.ts"
+    "dev": "nodemon src/server.ts",
+    "email-worker": "nodemon src/workers/email.worker.ts",
+    "sms-worker": "nodemon src/workers/sms.worker.ts"
   },
   "keywords": [],
   "author": "",

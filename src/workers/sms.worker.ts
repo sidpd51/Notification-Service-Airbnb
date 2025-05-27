@@ -10,9 +10,9 @@ export const smsWorker = new Worker("sms-queue", async (job) => {
 
 smsWorker.on('completed', (job) => {
     console.log(`🎉 Job ${job.id} completed`);
-})
+});
 
 smsWorker.on('failed', (job, err) => {
     console.log(`❌ Job ${job?.id} failed: ${err.message}`);
-})
+});
 

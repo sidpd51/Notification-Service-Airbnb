@@ -10,9 +10,9 @@ export const emailWorker = new Worker("email-queue", async (job) => {
 
 emailWorker.on('completed', (job) => {
     console.log(`🎉 Job ${job.id} completed`);
-})
+});
 
 emailWorker.on('failed', (job, err) => {
     console.log(`❌ Job ${job?.id} failed: ${err.message}`);
-})
+});
 
