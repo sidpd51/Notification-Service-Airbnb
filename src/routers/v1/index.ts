@@ -1,9 +1,11 @@
 import express from 'express';
-import emailRouter from './email.router';
+import { sendEmailHandler } from '../../controllers/sendEmail.controller';
+import { sendSmsHandler } from '../../controllers/sendSms.controller';
 
 const router = express.Router();
 
 
-router.use('/email', emailRouter);
+router.post('/email', sendEmailHandler);
+router.post('/sms', sendSmsHandler);
 
 export default router;

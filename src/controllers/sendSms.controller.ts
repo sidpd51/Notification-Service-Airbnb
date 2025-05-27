@@ -3,7 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import { InternalServerError } from "../utils/errors/app.error";
 import { sendSmsService } from "../service/sendSms.service.service";
 
-export const sendSms = async (req: Request, res: Response, next: NextFunction) => {
+export const sendSmsHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
         await sendSmsService(req.body);
         res.status(StatusCodes.OK).json({
