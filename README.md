@@ -85,6 +85,13 @@ npm run build
 npm start
 ```
 
+### Run Workers
+
+```bash
+npm run email-worker
+npm run sms-worker
+```
+
 ---
 
 ## 📬 API Endpoints
