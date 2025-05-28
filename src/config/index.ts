@@ -3,6 +3,8 @@ import IORedis from 'ioredis';
 
 type ServerConfigType = {
     PORT: number;
+    EMAIL?: string;
+    PASSWORD?: string;
 }
 
 function loadEnv() {
@@ -14,6 +16,8 @@ loadEnv();
 
 export const serverConfig: ServerConfigType = {
     PORT: Number(process.env.PORT) || 3000,
+    EMAIL: process.env.EMAIL,
+    PASSWORD: process.env.PASSWORD
 };
 
 export const connection = new IORedis({

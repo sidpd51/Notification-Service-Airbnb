@@ -1,5 +1,5 @@
 import winston from "winston";
-import { getCorrelationId } from "../utils/helpers/correlation.helpers";
+import { getCorrelationId } from "../utils/helpers/correlation.helper";
 const { format, transports, addColors, createLogger } = winston;
 const { combine, timestamp, errors, printf, colorize } = format;
 
