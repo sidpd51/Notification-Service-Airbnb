@@ -21,9 +21,9 @@ export const serverConfig: ServerConfigType = {
 };
 
 export const connection = new IORedis({
-    host: "127.0.0.1",
-    port: 6379,
-    password: "123456",
+    host: process.env.REDIS_HOST,
+    port: Number(process.env.REDIS_HOST) || 6379,
+    password: process.env.REDIS_PASSWORD,
     maxRetriesPerRequest: null,
 })
 

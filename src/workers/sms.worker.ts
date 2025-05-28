@@ -2,7 +2,7 @@ import { Worker } from "bullmq";
 import { connection } from "../config";
 
 export const smsWorker = new Worker("sms-queue", async (job) => {
-    //logic to be implemented!
+    //your sms sending logic will go here
     console.log(`📧 Sending sms to ${job.data.to}`)
 
 }, { connection, concurrency: 5 });
