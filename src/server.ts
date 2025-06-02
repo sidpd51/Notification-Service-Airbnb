@@ -34,7 +34,7 @@ app.use(appErrorHandler);
 app.listen(PORT, async () => {
     console.log(`Server is running on http://localhost:${PORT}`);
     logger.info('Project is running perfectly!');
-    await setupMailerWorker();
+    setupMailerWorker();
     console.log(`For the UI, open http://localhost:${PORT}/admin/queues`);
     console.log("Make sure Redis is running on port 6379 with authentication.");
 });
