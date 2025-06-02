@@ -1,10 +1,12 @@
 import dotenv from 'dotenv';
-import IORedis from 'ioredis';
 
 type ServerConfigType = {
     PORT: number;
     EMAIL?: string;
     PASSWORD?: string;
+    REDIS_HOST: string;
+    REDIS_PORT: number;
+    REDIS_PASSWORD?: string;
 }
 
 function loadEnv() {
@@ -17,13 +19,9 @@ loadEnv();
 export const serverConfig: ServerConfigType = {
     PORT: Number(process.env.PORT) || 3000,
     EMAIL: process.env.EMAIL,
-    PASSWORD: process.env.PASSWORD
+    PASSWORD: process.env.PASSWORD,
+    REDIS_HOST: process.env.REDIS_HOST || 'localhost',
+    REDIS_PORT: Number(process.env.REDIS_PORT) || 6379,
+    REDIS_PASSWORD: process.env.REDIS_PASSWORD
 };
-
-export const connection = new IORedis({
-    host: process.env.REDIS_HOST,
-    port: Number(process.env.REDIS_HOST) || 6379,
-    password: process.env.REDIS_PASSWORD,
-    maxRetriesPerRequest: null,
-})
 
