@@ -8,15 +8,15 @@ import router from './routers/v1';
 import { createBullBoard } from '@bull-board/api';
 import { BullMQAdapter } from '@bull-board/api/bullMQAdapter';
 import { ExpressAdapter } from '@bull-board/express';
-import { emailQueue } from './queues/email.queue';
 import { logger } from './config/logger.config';
-import { smsQueue } from './queues/sms.queue';
+import { mailerQueue } from './queues/mailer.queue';
+import { setupMailerWorker } from './processors/mailer.processor';
 
 const serverAdapter = new ExpressAdapter();
 serverAdapter.setBasePath("/admin/queues");
 
 const { } = createBullBoard({
-    queues: [new BullMQAdapter(emailQueue), new BullMQAdapter(smsQueue)],
+    queues: [new BullMQAdapter(mailerQueue)],
     serverAdapter
 });
 
@@ -34,6 +34,7 @@ app.use(appErrorHandler);
 app.listen(PORT, async () => {
     console.log(`Server is running on http://localhost:${PORT}`);
     logger.info('Project is running perfectly!');
+    await setupMailerWorker();
     console.log(`For the UI, open http://localhost:${PORT}/admin/queues`);
     console.log("Make sure Redis is running on port 6379 with authentication.");
 });
