@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response } from "express";
-import { sendEmailService } from "../service/sendEmail.service";
 import { StatusCodes } from "http-status-codes";
-import { InternalServerError } from "../utils/errors/app.error";
 import { logger } from "../config/logger.config";
+import { mailerService } from "../service/mailer.service";
+import { InternalServerError } from "../utils/errors/app.error";
 
 export const sendEmailHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        await sendEmailService(req.body);
+        await mailerService(req.body);
         logger.info("Successfully added email payload to email-queue!");
         res.status(StatusCodes.ACCEPTED).json({
             message: "We've successfully added your email to the queue. It will be processed shortly.",
