@@ -4,11 +4,9 @@ import { getRedisClient } from "../config/redis.config";
 import { NotificationDto } from "../dto/notification.dto";
 import { MAILER_JOB } from "../producers/mailer.producer";
 import { MAILER_QUEUE } from "../queues/mailer.queue";
+import { renderMailerTemplates } from "../templates/templates.handler";
 import { NotFoundError } from "../utils/errors/app.error";
 import { transporter } from "../utils/helpers/sendMail.helper";
-import { templateType } from "../templates/templateType";
-import fs from 'fs/promises';
-import Handlebars from "handlebars";
 
 export const setupMailerWorker = () => {
     const mailerProcessor = new Worker<NotificationDto>(MAILER_QUEUE, async (job: Job) => {
@@ -18,20 +16,7 @@ export const setupMailerWorker = () => {
         }
 
         const data: NotificationDto = job.data;
-        let html = '';
-        if (data.template === templateType.BOOKING) {
-            const templatePath = `src/templates/${templateType.BOOKING}.hbs`;
-            const source = await fs.readFile(templatePath, 'utf-8');
-            const compiledTemplate = Handlebars.compile(source);
-            html = compiledTemplate(data.params);
-        };
-
-        if (data.template === templateType.WELCOME) {
-            const templatePath = `src/templates/${templateType.WELCOME}.hbs`;
-            const source = await fs.readFile(templatePath, 'utf-8');
-            const compiledTemplate = Handlebars.compile(source);
-            html = compiledTemplate(data.params);
-        };
+        const html = await renderMailerTemplates(data.template, data.params);
 
         const mailOptions = {
             from: serverConfig.EMAIL,
@@ -52,7 +37,7 @@ export const setupMailerWorker = () => {
     });
 
     mailerProcessor.on("completed", (job: Job) => {
-        console.log(`Job ${job.id} completed successfully.`);
+        console.log(`Email send to: ${job.data.to} successfully.`);
     });
 
     mailerProcessor.on("failed", (job, error) => {
