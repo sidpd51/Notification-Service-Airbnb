@@ -91,8 +91,6 @@ Base URL: `/api/v1/notification`
 -   **Payload Schema**:
 
     -   `to` (required): string (valid email)
-    -   `cc` (optional): array of email strings
-    -   `bcc` (optional): array of email strings
     -   `subject` (required): string
     -   `template` (required): `"welcome"` | `"booking"`
     -   `params` (optional): object (any key-value pairs)
@@ -101,13 +99,13 @@ Base URL: `/api/v1/notification`
 
 ```json
 {
-    "to": "alice@example.com",
-    "subject": "Welcome to Airbnb!",
-    "template": "welcome",
-    "params": {
-        "firstName": "Alice",
-        "checkInDate": "2025-06-10"
-    }
+	"to": "alice@example.com",
+	"subject": "Welcome to Airbnb!",
+	"template": "welcome",
+	"params": {
+		"firstName": "Alice",
+		"checkInDate": "2025-06-10"
+	}
 }
 ```
 
