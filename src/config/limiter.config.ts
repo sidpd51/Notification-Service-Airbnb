@@ -1,8 +1,9 @@
 import rateLimit from "express-rate-limit";
+import { serverConfig } from ".";
 
 export const limiter = rateLimit({
-    windowMs: 2 * 60 * 1000,
-    max: 10,
+    windowMs: serverConfig.RATE_LIMIT_WINDOW_MS,
+    max: serverConfig.RATE_LIMIT_MAX,
     message: 'Too many requests from this IP, please try again later.',
     standardHeaders: true,
     legacyHeaders: false,

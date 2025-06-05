@@ -58,6 +58,9 @@ PASSWORD=your_email_password
 REDIS_HOST=127.0.0.1
 REDIS_PORT=6379
 REDIS_PASSWORD=
+# Rate Limiter Settings
+RATE_LIMIT_WINDOW_MS=60000
+RATE_LIMIT_MAX=100
 ```
 
 > Redis and mailer connection settings are centralized in [`src/config/index.ts`](src/config/index.ts).
@@ -78,6 +81,16 @@ npm run dev
 npm run build
 npm start
 ```
+
+---
+
+## 🛡️ Rate Limiting
+
+To protect the service from abuse and ensure fair usage, a rate limiter is implemented.
+
+-   **Default:** 100 requests per minute per IP (configurable via `.env`)
+-   Returns HTTP 429 if the limit is exceeded.
+-   Settings can be adjusted using `RATE_LIMIT_WINDOW_MS` and `RATE_LIMIT_MAX` in your `.env` file.
 
 ---
 
