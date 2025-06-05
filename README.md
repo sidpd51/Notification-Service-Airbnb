@@ -29,7 +29,7 @@ A scalable notification microservice for Airbnb, built with **Node.js**, **TypeS
 ## 🐳 Running Redis via Docker
 
 ```bash
-docker run --name redis -p 6379:6379 -d redis:7
+docker run --name redis -p 6379:6379 -d redis:7 redis-server --requirepass your_redis_password
 ```
 
 ---
@@ -57,7 +57,7 @@ EMAIL=your_email@gmail.com
 PASSWORD=your_email_password
 REDIS_HOST=127.0.0.1
 REDIS_PORT=6379
-REDIS_PASSWORD=
+REDIS_PASSWORD=your_redis_password
 # Rate Limiter Settings
 RATE_LIMIT_WINDOW_MS=60000
 RATE_LIMIT_MAX=100
