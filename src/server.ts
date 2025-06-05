@@ -11,6 +11,7 @@ import { ExpressAdapter } from '@bull-board/express';
 import { logger } from './config/logger.config';
 import { mailerQueue } from './queues/mailer.queue';
 import { setupMailerWorker } from './processors/mailer.processor';
+import { limiter } from './config/limiter.config';
 
 const serverAdapter = new ExpressAdapter();
 serverAdapter.setBasePath("/admin/queues");
@@ -20,7 +21,11 @@ const { } = createBullBoard({
     serverAdapter
 });
 
+
+
 const app = express();
+
+app.use(limiter)
 app.use(express.json());
 app.use("/admin/queues", serverAdapter.getRouter());
 
