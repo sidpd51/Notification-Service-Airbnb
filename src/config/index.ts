@@ -25,7 +25,6 @@ export const serverConfig: ServerConfigType = {
     REDIS_HOST: process.env.REDIS_HOST || 'localhost',
     REDIS_PORT: Number(process.env.REDIS_PORT) || 6379,
     REDIS_PASSWORD: process.env.REDIS_PASSWORD,
-    RATE_LIMIT_WINDOW_MS: Number(process.env.RATE_LIMIT_WINDOW_MS) || 1,
-    RATE_LIMIT_MAX: Number(process.env.RATE_LIMIT_WINDOW_MS) || 5
+    RATE_LIMIT_WINDOW_MS: Number(process.env.RATE_LIMIT_WINDOW_MS) || 60000,
+    RATE_LIMIT_MAX: Number(process.env.RATE_LIMIT_MAX) || 5
 };
-

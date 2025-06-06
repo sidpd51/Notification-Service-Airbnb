@@ -25,7 +25,7 @@ const { } = createBullBoard({
 
 const app = express();
 
-app.use(limiter)
+app.use(limiter);
 app.use(express.json());
 app.use("/admin/queues", serverAdapter.getRouter());
 
