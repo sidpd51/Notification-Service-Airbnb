@@ -100,27 +100,32 @@ Base URL: `/api/v1/notification`
 
 ### 📧 Send Email
 
--   **POST** `/api/v1/notification/email`
--   **Payload Schema**:
+- **POST** `/api/v1/notification/email`
+- **Live Endpoint:** [http://backend1.sidpd-notification.xyz/api/v1/notification/email](http://backend1.sidpd-notification.xyz/api/v1/notification/email)
+- **Payload Schema:**
+    - `to`: string (recipient email, required)
+    - `subject`: string (required)
+    - `template`: `"welcome"` or `"booking"` (required)
+    - `params`: object (optional key-value pairs; required fields depend on template)
 
-    -   `to` (required): string (valid email)
-    -   `subject` (required): string
-    -   `template` (required): `"welcome"` | `"booking"`
-    -   `params` (optional): object (any key-value pairs)
-
--   **Sample Payload**:
+#### Example Request Body
 
 ```json
 {
-	"to": "alice@example.com",
-	"subject": "Welcome to Airbnb!",
-	"template": "welcome",
-	"params": {
-		"firstName": "Alice",
-		"checkInDate": "2025-06-10"
-	}
+  "to": "abc@xyz.com",
+  "subject": "Welcome to Our Service!",
+  "template": "welcome",
+  "params": {
+    "firstName": "John",
+    "signupDate": "2025-06-01",
+    "plan": "Pro",
+    "orderId": "#1A123ER"
+  }
 }
 ```
+
+- For the `template` field, you can use either `"welcome"` or `"booking"`.
+- If you use the `"booking"` template, the `orderId` parameter is required in `params`.
 
 ---
 
